@@ -1,0 +1,7 @@
+POST user/signup - {}-
+POST user/login - {} - match ? token : error -
+
+POST notes/create -
+GET notes - verify the token and user_id
+PATCH notes/edit/:id
+DELETE notes/delete/:id 
