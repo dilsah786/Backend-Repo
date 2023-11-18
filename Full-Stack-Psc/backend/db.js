@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
 const notesSchema = new mongoose.Schema({
     title:{type:String,required:true},
     author:{type:String,required:true},
+    userId:{type:String,required:true}
 })
 
 
