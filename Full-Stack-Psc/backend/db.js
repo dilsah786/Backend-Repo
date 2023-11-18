@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
     email:{type:String,required:true},
     password:{type:String,required:true},
 })
-
   
 const notesSchema = new mongoose.Schema({
     title:{type:String,required:true},

@@ -5,25 +5,26 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const { notesController } = require("./routes/notes.routes");
 const { authentication } = require("./middlewares/authentication");
-
+const cors = require("cors")
 const app = express();
 app.use(express.json());
 const port = 3000;
 
-// app.use("/user",userController)
+ app.use(cors())
+
 
 app.post("/user/signup", async (req, res) => {
   const { email, password } = req.body;
 
   bcrypt.hash(password, 4, async function (err, hash) {
     if (err) {
-      return res.send(err);
+      return console.log(err)
     } else {
       const user = await UserModel.create({ email: email, password: hash });
-      res.send(user);
+      res.json({status:"Signed up SuccessFully"});
     }
   });
-  console.log("Signed up SuccessFully");
+ // res.json("Signed up SuccessFully");
 });
 
 app.post("/user/login", async (req, res) => {
@@ -32,32 +33,24 @@ app.post("/user/login", async (req, res) => {
  const hashedPassword = user.password;
 
   bcrypt.compare(password, hashedPassword, async function (err, result) {
-    if (!result) { 
-      res.send("Something went wrong. Please try again");
+    if (!result || err ) { 
+      res.json({status:"Something went wrong. Please try again"});
     } else {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
       console.log(result);
-      res.send({ status: "Login SuccessFul ", token: token });
+      res.json({ status: "Login SuccessFul ", token: token });
       
     }
   });
 });
 
-app.get("/dil",async(req,res)=>{
-    const note = await NotesModel.find({_id:"6555d4d30d561de425964930"})
-    res.send(note)
-})
 
 // Authentication Middleware 
 app.use(authentication);
 
-// Getting Notes
-// app.use("/", notesController);
 
 // Creating Notes 
  app.use("/notes", notesController);
-
-
 
 
 // Running on 3000 port and connecting to mongoDB

@@ -8,12 +8,13 @@ const notesController = Router();
 
 // Getting Notes
 
-notesController.get("/notes", async (req, res) => {
+notesController.get("/", async (req, res) => {
   const userId = req.body.userId;
   console.log(userId);
   const notes = await NotesModel.find({ userId: userId });
-  res.send(notes);
+  res.json({notes:notes});
 });
+
 
 // Creatint Posts
 notesController.post("/create", async (req, res) => {
@@ -23,8 +24,11 @@ notesController.post("/create", async (req, res) => {
     author,
     userId,
   });
-  res.send({ message: "Post Notes", newNote: newNote });
+  console.log(title , author  , userId)
+  res.json({ message: "Notes Created", newNote: newNote });
 });
+
+
 
 // Deleting Posts
 notesController.delete("/delete/:id", async (req, res) => {
@@ -33,10 +37,13 @@ notesController.delete("/delete/:id", async (req, res) => {
     _id: deleteId,
     userId: req.body.userId,
   });
+  console.log(deleteId);
+  console.log(req.body.userId)
+
   if (deletedNotes) {
-    res.send("Notes Deleted");
+    res.json({status:"Notes Deleted"});
   } else {
-    res.send("Unable to Delete");
+    res.json({status:"Unable to Delete"});
   }
 });
 
