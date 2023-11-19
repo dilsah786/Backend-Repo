@@ -37,6 +37,7 @@ app.post("/user/login", async (req, res) => {
   const user = await UserModel.findOne({ email: email });
   const hashedPassword = user.password;
 
+  
   bcrypt.compare(password, hashedPassword, async function (err, result) {
     if (!result || err) {
       res.json({ status: "Something went wrong. Please try again" });
@@ -44,7 +45,7 @@ app.post("/user/login", async (req, res) => {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
       console.log(result);
       res.json({ status: "Login SuccessFul ", token: token });
-    }
+    } 
   });
 });
 

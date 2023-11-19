@@ -1,32 +1,43 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-const EditNotes = ({ id }) => {
+
+
+const EditNotes = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
 
   const token = JSON.parse(localStorage.getItem("token"));
 
+  let { id } = useParams();
+ 
+
   const handleUpdate = async (id) => {
-    console.log(id);
+
     const newNote = {
       title,
       author,
     };
-
     try {
       const result = await fetch(`http://localhost:3000/notes/edit/${id}`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization:`Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newNote),
       });
+
+
       const res = await result.json();
-      console.log(res);
+      console.log("Assignment Updated")
+       console.log(res);
+
+
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   return (
@@ -35,7 +46,7 @@ const EditNotes = ({ id }) => {
       <div>
         <input placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <input placeholder="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
-        <button onClick={() => handleUpdate()}>Edit Note</button>
+        <button onClick={()=>handleUpdate(id)}>Edit Note</button>
       </div>
     </div>
   );

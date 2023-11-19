@@ -21,7 +21,7 @@ const Login = () => {
 
       const res = await result.json();
       console.log(res);
-      setToken(res.token);
+      setToken(res.token); 
       if (res.token) {
         console.log("Logged in");
       } else {
@@ -30,7 +30,7 @@ const Login = () => {
     } catch (err) {
       console.log(err);
       console.log("User not Found");
-    }
+    } 
   };
 
   localStorage.setItem("token", JSON.stringify(token));

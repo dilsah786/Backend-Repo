@@ -56,9 +56,10 @@ const Home = () => {
             <div key={note._id}><h3>{note._id} ------- {note.title}</h3>
               <h3>{note.author} </h3>
               <button onClick={() => handleDelete(note._id)}> Delete </button>
-              <button>
-                <Link to="/notes/edit" element={<EditNotes id={note._id} />}></Link>
+              <button  >
+                <Link to={`/notes/edit/${note._id}`}> Edit </Link>
               </button>
+
             </div>
           );
         })}
