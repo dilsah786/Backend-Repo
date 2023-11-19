@@ -20,14 +20,13 @@ const Login = () => {
       });
 
       const res = await result.json();
-      console.log(res)
+      console.log(res);
       setToken(res.token);
-      if(res.token){
+      if (res.token) {
         console.log("Logged in");
-      }else{
+      } else {
         console.log("User Not Found");
       }
-
     } catch (err) {
       console.log(err);
       console.log("User not Found");

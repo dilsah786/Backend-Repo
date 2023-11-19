@@ -4,32 +4,24 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
-
-  const handleSubmit = async() =>{
-    const userDetail = {
-      email,
-      password
-    }
-
-    try{
-      const result = await fetch("http://localhost:3000/user/signup",{
-        method:"POST",
+  const handleSubmit = async () => {
+    const userDetail = {email,password};
+    try {
+      const result = await fetch("http://localhost:3000/user/signup", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify(userDetail)
-      })
+        body: JSON.stringify(userDetail),
+      });
 
-       const res = result.json();
-      console.log(res)
-      console.log("user Created")
-
-    }catch(err){
-      console.log(err)
+      const res = result.json();
+      console.log(res);
+      console.log("user Created");
+    } catch (err) {
+      console.log(err);
     }
-  }
-
+  };
 
   return (
     <div>
@@ -46,7 +38,7 @@ const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={()=>handleSubmit()} >Register</button>
+        <button onClick={() => handleSubmit()}>Register</button>
       </div>
     </div>
   );

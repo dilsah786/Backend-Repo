@@ -5,7 +5,6 @@ import EditNotes from "./EditNotes";
 const Home = () => {
   const [notes, setNotes] = useState([]);
 
-
   const token = JSON.parse(localStorage.getItem("token"));
   // Getting Notes Here
   const getNotes = async () => {
@@ -26,32 +25,22 @@ const Home = () => {
   };
 
   // Deleting Notes Here
-  const handleDelete = async(id) =>{
-    console.log(id)
-    try{
-      const result = await fetch(`http://localhost:3000/notes/delete/${id}`,{
-        method:"DELETE",
-        headers:{
-          Authorization:`Bearer ${token}`
-        }
-      })
-      const res= await result.json()
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      const result = await fetch(`http://localhost:3000/notes/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const res = await result.json();
       console.log(res);
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-   getNotes()
-  }
-
-
-
-
-
-
-
-
-
-
+    getNotes();
+  };
 
   useEffect(() => {
     getNotes();
@@ -64,11 +53,12 @@ const Home = () => {
       <div>
         {notes.map((note) => {
           return (
-            <div key={note._id}>
-              <h3> {note._id} ------- {note.title}</h3>
+            <div key={note._id}><h3>{note._id} ------- {note.title}</h3>
               <h3>{note.author} </h3>
-              <button onClick={()=>handleDelete(note._id)} > Delete </button>
-              <button ><Link to="/notes/edit" element={<EditNotes id={note._id} />} > Edit </Link></button>
+              <button onClick={() => handleDelete(note._id)}> Delete </button>
+              <button>
+                <Link to="/notes/edit" element={<EditNotes id={note._id} />}></Link>
+              </button>
             </div>
           );
         })}
