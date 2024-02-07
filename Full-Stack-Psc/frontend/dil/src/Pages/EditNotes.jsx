@@ -19,7 +19,7 @@ const EditNotes = () => {
       author,
     };
     try {
-      const result = await fetch(`http://localhost:3000/notes/edit/${id}`, {
+      const result = await fetch(`${BaseUrl}/twits/edit/${id}`, {
         method: "PATCH",
         headers: {
           Authorization:`Bearer ${token}`,

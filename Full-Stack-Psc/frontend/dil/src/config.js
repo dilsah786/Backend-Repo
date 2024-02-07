@@ -1,0 +1,1 @@
+export default BaseUrl = `https://hosiery-lemming.cyclic.app`

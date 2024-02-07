@@ -9,7 +9,7 @@ const Home = () => {
   // Getting Notes Here
   const getNotes = async () => {
     try {
-      const result = await fetch("http://localhost:3000/notes", {
+      const result = await fetch(`${BaseUrl}/twits`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ const Home = () => {
   const handleDelete = async (id) => {
     console.log(id);
     try {
-      const result = await fetch(`http://localhost:3000/notes/delete/${id}`, {
+      const result = await fetch(`${BaseUrl}/twits/delete/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

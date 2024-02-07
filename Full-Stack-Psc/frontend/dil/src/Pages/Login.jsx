@@ -11,7 +11,7 @@ const Login = () => {
       password,
     };
     try {
-      const result = await fetch("http://localhost:3000/user/login", {
+      const result = await fetch(`${BaseUrl}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

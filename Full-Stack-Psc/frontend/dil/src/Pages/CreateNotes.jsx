@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import BaseUrl from "../config"
 const CreateNotes = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -12,7 +12,7 @@ const CreateNotes = () => {
       author,
     };
     try {
-      const result = await fetch("http://localhost:3000/notes/create", {
+      const result = await fetch(`${BaseUrl}/twits/create`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

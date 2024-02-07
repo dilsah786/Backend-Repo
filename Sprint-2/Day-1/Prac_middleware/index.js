@@ -24,11 +24,11 @@ app.get("/", (req, res) => {
   const time = nextTime - req.preTime;
 
   res.send(
-    "It took " +
-      time +
-      " ms" +
-      "    <---------      Hello Browser  " +
-      req.requested
+    `It took 
+      ${time} 
+      ms
+        <---------      Hello Browser  
+      ${req.requested}`
   );
   // console.log("2")
 });

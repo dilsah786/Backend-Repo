@@ -7,7 +7,7 @@ const Register = () => {
   const handleSubmit = async () => {
     const userDetail = {email,password};
     try {
-      const result = await fetch("http://localhost:3000/user/signup", {
+      const result = await fetch(`${BaseUrl}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
