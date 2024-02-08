@@ -6,11 +6,6 @@ const userController = express.Router();
 
 require("dotenv").config();       // to use all data from .env file
 
-userController.get("/", async (req, res) => {
-  const user = await UserModel.find();
-  res.json({ status: "success", data: "Here is your data", user: user });
-});
-
 
 //  Registering user code starts here
 
@@ -56,7 +51,7 @@ userController.post("/login", async (req, res) => {
         message: "Please enter correct credentials to log in",
       });
     } else {
-      const token = jwt.sign({ id: existingUser._id }, process.env.secretToken);
+      const token = jwt.sign({ userId: existingUser._id }, process.env.secretToken);
       res.json({
         status: "User Logged in Successfully",
         data: [
